@@ -256,7 +256,7 @@
   .cats>.cat{flex:0 0 calc((100% - 54px)/4);min-width:0}
   .meta .row{align-items:flex-start;gap:12px}
   @media(max-width:900px){.cats>.cat{flex-basis:calc((100% - 18px)/2)}}
-.course .buy{display:block;width:100%;text-align:center;margin-top:12px;padding:10px 14px;font-size:13px}.buy-pending{background:transparent;border:1px dashed #3a2e22;color:var(--silver-mut);cursor:default}.nav-links a.nav-login{white-space:nowrap;border:1px solid var(--copper);border-radius:20px;padding:5px 12px}.thumb-img{display:block;width:100%;height:auto;aspect-ratio:16/9;object-fit:cover;border-radius:12px;background:#17171d}</style>
+.course .buy{display:block;width:100%;text-align:center;margin-top:12px;padding:10px 14px;font-size:13px}.buy-pending{background:transparent;border:1px dashed #3a2e22;color:var(--silver-mut);cursor:default}.nav-links a.nav-login{white-space:nowrap;border:1px solid var(--copper);border-radius:20px;padding:5px 12px}.thumb-img{display:block;width:100%;height:auto;aspect-ratio:16/9;object-fit:cover;border-radius:12px;background:#17171d}.course.has-buy{cursor:pointer;transition:border-color .15s,transform .15s}.course.has-buy:hover{border-color:var(--copper);transform:translateY(-2px)}@media (prefers-reduced-motion:reduce){.course.has-buy{transition:none}.course.has-buy:hover{transform:none}}</style>
 </head>
 <body id="top">
 <nav><div class="wrap nav-in">
@@ -552,8 +552,8 @@
 <section class="blk" id="videos" style="padding-top:0"><div class="wrap">
   <h2 class="sec">See it in action</h2>
   <div class="vids">
-    <div class="video-here"><div class="vh-play"></div><div class="vh-label">VIDEO HERE</div><div class="vh-sub">Intro: Welcome to SilverCopper Training</div></div>
-    <div class="video-here"><div class="vh-play"></div><div class="vh-label">VIDEO HERE</div><div class="vh-sub">Sample lesson — free preview</div></div>
+    <img class="thumb-img" src="thumbs/intro.jpg" alt="Intro: Welcome to SilverCopper Training — Tim Cain and Luke Mory" width="800" height="450" loading="lazy" decoding="async">
+    <img class="thumb-img" src="thumbs/sample-lesson.jpg" alt="Sample lesson — Use of Force" width="800" height="450" loading="lazy" decoding="async">
   </div>
 </div></section>
 
@@ -763,4 +763,12 @@
   });
 })();
 </script>
-</body></html>
+<script>
+/* Whole course card opens the same checkout as its Buy & Start button. */
+document.querySelectorAll('.course').forEach(function(c){
+  var b=c.querySelector('a.buy'); if(!b) return;
+  c.classList.add('has-buy');
+  c.addEventListener('click',function(e){ if(e.target.closest('a')) return;
+    if(e.metaKey||e.ctrlKey){ window.open(b.href,'_blank','noopener'); } else { location.href=b.href; } });
+});
+</script></body></html>
